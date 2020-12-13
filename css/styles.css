@@ -3,11 +3,13 @@
   text-align: center;
 }
 
-.hero > .container {
-  padding-top: 200px;
-  padding-bottom: 200px;
+.hero-container {
+  margin: 0 auto;
+  padding: 200px 15px;
+  min-width: 1200px;
   max-width: 1600px;
 
+  background-color: var(--hero-bg-color);
   background-image: linear-gradient(
       to right,
       rgba(47, 48, 58, 0.4),
@@ -38,15 +40,15 @@
 .advantages-list {
   display: flex;
 }
-.advantages-list-item {
+.advantages-item {
   flex-basis: calc((100% - 90px) / 4);
 }
 
-.advantages-list-item:not(:first-child) {
+.advantages-item:not(:first-child) {
   margin-left: var(--list-item-gap);
 }
 
-.advantages-list-icon-container {
+.advantages-thumb {
   margin-bottom: 30px;
   display: flex;
   justify-content: center;
@@ -58,7 +60,7 @@
   border-radius: 4px;
 }
 
-.advantages-list-title {
+.advantages-title {
   margin-bottom: 10px;
 
   font-weight: 700;
@@ -74,15 +76,33 @@
   display: flex;
 }
 
-.about-list-item {
+.about-item {
+  position: relative;
   flex-basis: calc((100% - 60px) / 3);
 }
 
-.about-list-item:not(:first-child) {
+.about-item:not(:first-child) {
   margin-left: var(--list-item-gap);
 }
 
+.about-title {
+  position: absolute;
+  bottom: 0;
+
+  width: 100%;
+
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 70px;
+  text-align: center;
+  text-transform: uppercase;
+
+  color: var(--primery-light-color);
+  background-color: var(--about-title-bgc);
+}
+
 /* TEAM */
+
 .team {
   font-size: 16px;
   line-height: 1.187;
@@ -90,11 +110,11 @@
   background-color: var(--secondary-bg-color);
 }
 
-.team-list {
+.team-cards-list {
   display: flex;
 }
 
-.team-list-item {
+.team-card {
   flex-basis: calc((100% - 90px) / 4);
 
   border-radius: 0px 0px 4px 4px;
@@ -104,18 +124,18 @@
     0px 2px 1px rgba(0, 0, 0, 0.2);
 }
 
-.team-list-item:not(:first-child) {
+.team-card:not(:first-child) {
   margin-left: var(--list-item-gap);
 }
 
-.team-list-item-container {
+.team-text-container {
   padding-top: 30px;
   padding-bottom: 30px;
 
   text-align: center;
 }
 
-.team-list-title {
+.team-titler {
   margin-bottom: 10px;
 
   font-weight: 500;
@@ -123,11 +143,11 @@
   color: var(--titels-color);
 }
 
-.team-list-position {
+.team-position {
   margin-bottom: 16px;
 }
 
-.team-list-social-links {
+.team-social-links {
   display: flex;
   justify-content: space-between;
   margin: 0 32px;
@@ -136,10 +156,17 @@
 .social-links-button {
   width: 44px;
   height: 44px;
+  border-radius: 50%;
+
   display: flex;
   align-items: center;
   justify-content: center;
+
   color: var(--primery-icons-color);
+
+  transition-property: color, background-color;
+  transition-duration: 250ms;
+  transition-timing-function: var(--cubic);
 }
 
 .social-links-button-icon {
@@ -148,26 +175,26 @@
 
 .social-links-button:hover,
 .social-links-button:focus {
-  border-radius: 50%;
   background-color: var(--accent-color);
   color: var(--primery-light-color);
 }
 
 /* CLIENTS */
+
 .clients-list {
   display: flex;
   height: 90px;
 }
 
-.clients-list-item {
+.clients-item {
   flex-basis: calc((100% -150px) / 6);
 }
 
-.clients-list-item:not(:first-child) {
+.clients-item:not(:first-child) {
   margin-left: var(--list-item-gap);
 }
 
-.clients-list-button {
+.clients-button {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -176,18 +203,24 @@
   color: var(--primery-icons-color);
   border: 1px solid var(--primery-icons-color);
   border-radius: 4px;
+
+  transition-property: color, border-color;
+  transition-duration: 250ms;
+  transition-timing-function: var(--cubic);
 }
 
-.clients-list-button:hover,
-.clients-list-button:focus {
+.clients-button:hover,
+.clients-button:focus {
   color: var(--accent-color);
   border-color: var(--accent-color);
 }
 
-.clients-list-button-icon {
+.clients-button-icon {
   fill: currentColor;
 }
+
 /* PORTFOLIO */
+
 .portfolio-filter {
   display: flex;
   justify-content: center;
@@ -212,6 +245,14 @@
 
   color: var(--titels-color);
   background-color: var(--secondary-bg-color);
+
+  transition-property: color, background-color, box-shadow;
+  transition-duration: 250ms;
+  transition-timing-function: var(--cubic);
+}
+
+.portfolio-filter-btn.current {
+  pointer-events: none;
 }
 
 .portfolio-filter-btn.current,
@@ -227,7 +268,7 @@
   cursor: pointer;
 }
 
-.portfolio-list {
+.portfolio-cards-list {
   display: flex;
   flex-wrap: wrap;
 
@@ -235,26 +276,56 @@
   margin-left: calc(-1 * var(--list-item-gap));
 }
 
-.portfolio-list-item {
+.portfolio-card {
   flex-basis: calc(100% / 3 - var(--list-item-gap));
   margin-left: var(--list-item-gap);
   margin-top: var(--list-item-gap);
 }
 
-.portfolio-list-link:hover,
-.portfolio-list-link:focus {
-  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12), 0px 4px 4px rgba(0, 0, 0, 0.06),
-    1px 4px 6px rgba(0, 0, 0, 0.16);
-  outline: none;
-}
-
-.portfolio-list-link {
+.portfolio-link {
   display: flex;
   flex-direction: column;
   height: 100%;
+
+  transition: box-shadow 250ms var(--cubic);
 }
 
-.portfolio-list-item-container {
+.portfolio-link:hover,
+.portfolio-link:focus {
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12), 0px 4px 4px rgba(0, 0, 0, 0.06),
+    1px 4px 6px rgba(0, 0, 0, 0.16);
+}
+
+.portfolio-thumb {
+  position: relative;
+  overflow: hidden;
+}
+
+.portfolio-discription {
+  position: absolute;
+  padding: 63px 24px;
+  top: 100%;
+  width: 100%;
+  height: 100%;
+
+  font-size: 18px;
+  line-height: 1.555;
+  letter-spacing: 0.03em;
+
+  background-color: var(--accent-color);
+  color: var(--primery-light-color);
+
+  opacity: 0.9;
+
+  transition: transform 250ms var(--cubic);
+}
+
+.portfolio-link:hover .portfolio-discription,
+.portfolio-link:focus .portfolio-discription {
+  transform: translateY(-100%);
+}
+
+.portfolio-text-container {
   flex-grow: 1;
   padding: 20px 24px;
   border-left: 1px solid var(--border-color);
@@ -262,7 +333,7 @@
   border-bottom: 1px solid var(--border-color);
 }
 
-.portfolio-list-title {
+.portfolio-title {
   margin-bottom: 4px;
 
   font-weight: 700;
@@ -273,7 +344,7 @@
   color: var(--titels-color);
 }
 
-.portfolio-list-text {
+.portfolio-text {
   font-size: 16px;
   line-height: 1.875;
 
